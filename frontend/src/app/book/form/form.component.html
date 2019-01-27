@@ -1,0 +1,12 @@
+<form class="form-container" [formGroup]="bookForm" (ngSubmit)="onSubmit(bookForm.value)"novalidate>
+  <mat-form-field>
+    <input matInput placeholder="title" formControlName="title">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="publisher" formControlName="publisher">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="yearOfPublishing" formControlName="yearOfPublishing">
+  </mat-form-field>
+  <button class="btn btn-primary" mat-button type="submit">Save</button>
+</form>

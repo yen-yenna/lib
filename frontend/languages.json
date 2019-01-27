@@ -1,0 +1,73 @@
+{
+  "languages":[{
+    "id": 1,
+    "value": "English",
+    "short": "EN",
+    "code": "001",
+    "messages": {
+      "common":{
+        "library": "Library",
+        "book list": "Book list",
+        "register": "Register",
+        "login": "Login"
+      },
+      "List book": {
+        "new" : "New",
+        "title": "Title",
+        "publisher": "Publisher",
+        "yearOfPublishing": "Year of Publishing",
+        "status": "Status",
+        "Reservation": "Reservation"
+      },
+      "registration": {
+        "username": "Username",
+        "password": "Password",
+        "name": "Name",
+        "surname": "Surname",
+        "pesel": "pesel",
+        "email": "email"
+      },
+      "login": {
+        "username": "username",
+        "password": "password"
+      }
+    }
+  },
+    {
+      "id": 2,
+      "value": "Polski",
+      "short": "PL",
+      "code": "002",
+      "messages":{
+        "common":{
+          "library": "Biblioteka",
+          "book list": "Lista ksiazek",
+          "register": "Rejestracja",
+          "login": "Login"
+        },
+        "List book": {
+          "new" : "Nowy",
+          "title": "Tytul",
+          "publisher": "Wydawnictwo",
+          "yearOfPublishing": "Rok Wydania",
+          "status": "Status",
+          "Reservation": "Reserwacja"
+        },
+        "registration": {
+          "username": "użytkownik",
+          "password": "hasło",
+          "name": "imię",
+          "surname": "nazwisko",
+          "pesel": "pesel",
+          "email": "email"
+        },
+        "login": {
+          "username": "użytkownik",
+          "password": "hasło"
+        }
+
+      }
+
+}]
+
+}

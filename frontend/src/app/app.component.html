@@ -1,0 +1,70 @@
+
+<body>
+
+  <mat-toolbar color="accent">
+
+    <mat-toolbar-row>
+
+
+      <span>Library</span>
+
+
+      <div>
+        <a mat-button routerLink="/">
+          <mat-icon>home</mat-icon>
+          <a class="link"></a>
+        </a>
+        <a mat-button routerLink="/book-list">
+          <mat-icon>book</mat-icon>
+          <a class="link" >List book</a>
+        </a>
+
+        <a mat-button *ngIf="!username" routerLink="/register">
+        <mat-icon>how_to_reg</mat-icon>
+        <a class="link" >Register</a>
+      </a>
+        <a mat-button *ngIf="username" routerLink="/book-proposals">
+        <mat-icon>library_books</mat-icon>
+        <a class="link" >Book proposals</a>
+      </a>
+        <a mat-button *ngIf="username" routerLink="/my-profile">
+          <mat-icon>accessibility</mat-icon>
+          <a class="link" >My Profile</a>
+        </a>
+        <a mat-button  *ngIf="!username" routerLink="/login">
+          <mat-icon>add_circle</mat-icon>
+          <a class="link" > Login</a>
+        </a>
+        <a mat-button  *ngIf="username" (click)="logout()">
+          <mat-icon>near_me</mat-icon>
+          <a class="link" > Logout</a>
+        </a>
+        <span class="example-spacer"></span>
+
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <label class="label"  for="lightswitch">
+    <a mat-button >
+      <mat-icon>invert_colors</mat-icon>
+    </a>
+  </label>
+
+  <input type="checkbox" id="lightswitch">
+
+  <div class="main">
+
+
+  <router-outlet></router-outlet>
+
+
+
+  </div>
+
+
+</body>
+
+
+

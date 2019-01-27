@@ -1,0 +1,15 @@
+<br>
+<div fxLayout fxLayoutAlign="center center">
+  <h2>   Login:</h2>
+  <br>
+</div>
+<form class="form-container" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" >
+
+  <mat-form-field>
+    <input matInput placeholder="username" formControlName="username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="password" formControlName="password" required>
+  </mat-form-field>
+  <button class="btn btn-default" mat-button type="submit">Login</button>
+</form>

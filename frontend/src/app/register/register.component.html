@@ -1,0 +1,28 @@
+<br>
+<div fxLayout fxLayoutAlign="center center">
+  <h2>   Registration:</h2>
+  <br>
+</div>
+<form class="form-container" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" novalidate>
+
+  <mat-form-field>
+    <input matInput placeholder="username" formControlName="username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="password" formControlName="password" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="name" formControlName="name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="surname" formControlName="surname" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="pesel" formControlName="pesel" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="email" formControlName="email" required>
+  </mat-form-field>
+
+  <button class="btn btn-default" mat-button type="submit">Save</button>
+</form>
