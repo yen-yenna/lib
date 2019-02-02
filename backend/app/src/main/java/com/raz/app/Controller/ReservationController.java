@@ -49,8 +49,7 @@ public class ReservationController {
             @RequestBody ReservationRequest reservationRequest
     ){
 
-        //sprawdzanie czy ksiazka juz jest zarezerwowana - jesli jest to rzuca bad request
-        //ale to jest dodatkowe zabezpieczenie, jest tez zabezpieczone we frontendzie, ze przed rezerwacja sprawdza status ksiazki czy jest inna niz avaible
+
         Book isReserved = bookRepository.getOne(reservationRequest.getBook_id());
         if(!isReserved.getStatus().equals("AVAIBLE")){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,24 +57,21 @@ public class ReservationController {
 
         Reservation reservation = new Reservation();
 
-        //po kolei dodaje wlasciwosci nowej rezerwacji
+
         reservation.setReservationDate(LocalDate.now());
         //rezerwacja ma 7 dni
         reservation.setReservedTo(LocalDate.now().plus(7, ChronoUnit.DAYS));
         reservation.setBook(bookRepository.findById(reservationRequest.getBook_id()).get());
         reservation.setUser(userRepository.findByUsername(reservationRequest.getUsername()));
 
-        //referencja to taki wskaznik w Javie
-        //pobieram referencje ksiazki z bazy, bo getOne() pobiera referencje z bazy i mozna
-        //robic na tym latwo update, a findById pobiera obiekt bez referencji
+
         Book book = bookRepository.getOne(reservationRequest.getBook_id());
         book.setStatus("Reserved to "+LocalDate.now().plus(7, ChronoUnit.DAYS));
 
-        //to automatycznie zapisuje w bazie rezerwacje i automatycznie zapisuje do ksiazki id rezerwacji
+
         book.setActualReservationId(reservatioRepository.save(reservation).getId());
         bookRepository.save(book);
 
-        //nie przejmuj sie jak czasem rzuca bledy w consoli - poki sie wszystko w bazie zgadza to jest ok :)
 
         return ResponseEntity.ok(reservation);
     }
