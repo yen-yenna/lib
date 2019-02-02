@@ -10,6 +10,7 @@ import com.raz.app.register.Repository.UserRepository;
 import com.raz.app.request.ReservationRequest;
 import com.raz.app.response.UserReservationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,14 @@ public class ReservationController {
     public ResponseEntity<?> add(
             @RequestBody ReservationRequest reservationRequest
     ){
+
+        //sprawdzanie czy ksiazka juz jest zarezerwowana - jesli jest to rzuca bad request
+        //ale to jest dodatkowe zabezpieczenie, jest tez zabezpieczone we frontendzie, ze przed rezerwacja sprawdza status ksiazki czy jest inna niz avaible
+        Book isReserved = bookRepository.getOne(reservationRequest.getBook_id());
+        if(!isReserved.getStatus().equals("AVAIBLE")){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Reservation reservation = new Reservation();
 
         //po kolei dodaje wlasciwosci nowej rezerwacji
@@ -87,6 +96,23 @@ public class ReservationController {
         bookRepository.save(bookToUpdate);
 
         return ResponseEntity.ok("Reservation changed");
+    }
+
+    @PostMapping(value = "/reservation/return", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> declineBorrow(
+            @RequestBody Long bookId
+    ){
+
+        Book bookToUpdate = bookRepository.getOne(bookId);
+        bookToUpdate.setStatus("AVAIBLE");
+
+        Rent rent =rentRepository.getOne(bookToUpdate.getActualRentId());
+        rent.setStatus("CANCELLED");
+        rent.setRentTo(LocalDate.now());
+        bookToUpdate.setActualRentId(null);
+        bookRepository.save(bookToUpdate);
+
+        return ResponseEntity.ok("Rent changed");
     }
 
     @PostMapping(value = "/reservation/borrow", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
