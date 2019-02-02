@@ -6,7 +6,7 @@
     <mat-toolbar-row>
 
 
-      <span>Library</span>
+      <span>{{ 'title' | translate }}</span>
 
 
       <div>
@@ -14,37 +14,53 @@
           <mat-icon>home</mat-icon>
           <a class="link"></a>
         </a>
+
+        <a mat-button routerLink="/search">
+          <mat-icon>find_in_page</mat-icon>
+          <a class="link"></a>
+        </a>
         <a mat-button routerLink="/book-list">
           <mat-icon>book</mat-icon>
-          <a class="link" >List book</a>
+          <a class="link" >{{'book list' | translate}}</a>
         </a>
 
         <a mat-button *ngIf="!username" routerLink="/register">
         <mat-icon>how_to_reg</mat-icon>
-        <a class="link" >Register</a>
+        <a class="link" >{{'register' | translate}}</a>
       </a>
         <a mat-button *ngIf="username" routerLink="/book-proposals">
         <mat-icon>library_books</mat-icon>
-        <a class="link" >Book proposals</a>
+        <a class="link" >{{'proposals' | translate}}</a>
       </a>
         <a mat-button *ngIf="username" routerLink="/my-profile">
           <mat-icon>accessibility</mat-icon>
-          <a class="link" >My Profile</a>
+          <a class="link" >{{'my profile' | translate}}</a>
         </a>
         <a mat-button  *ngIf="!username" routerLink="/login">
           <mat-icon>add_circle</mat-icon>
-          <a class="link" > Login</a>
+          <a class="link" > {{'login' | translate}}</a>
         </a>
         <a mat-button  *ngIf="username" (click)="logout()">
           <mat-icon>near_me</mat-icon>
-          <a class="link" > Logout</a>
+          <a class="link" > {{'logout' | translate}}</a>
         </a>
         <span class="example-spacer"></span>
-
+        <button mat-button [matMenuTriggerFor]="language">
+          <mat-icon>translate</mat-icon>
+          <mat-menu #language="matMenu">
+            <button mat-menu-item color="primary" (click)="setLang('en')">
+              EN
+            </button>
+            <button mat-menu-item color="primary" (click)="setLang('pl')">
+              PL
+            </button>
+          </mat-menu>
+        </button>
       </div>
 
     </mat-toolbar-row>
   </mat-toolbar>
+
 
   <label class="label"  for="lightswitch">
     <a mat-button >

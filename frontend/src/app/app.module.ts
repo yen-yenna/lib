@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { FormComponent } from './book/form/form.component';
@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ListComponent } from './book/list/list.component';
 import { LoginComponent } from './login/login.component';
 import {RouterModule} from '@angular/router';
+import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
@@ -32,7 +33,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProposalsComponent } from './proposals/proposals.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlsDzialajComponent } from './pls-dzialaj/pls-dzialaj.component';
+import {TranslateService} from './translate.service';
+import { TranslatePipe } from './translate.pipe';
+import { SearchComponent } from './search/search.component';
 
+export function setupTranslateFactory(
+  service: TranslateService): Function {
+  return () => service.use('en');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +54,9 @@ import { PlsDzialajComponent } from './pls-dzialaj/pls-dzialaj.component';
     ProfileComponent,
     ProposalsComponent,
     HomeComponent,
-    PlsDzialajComponent
+    PlsDzialajComponent,
+    TranslatePipe,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +80,14 @@ import { PlsDzialajComponent } from './pls-dzialaj/pls-dzialaj.component';
     FlexLayoutModule,
     ],
   providers: [
-    AddComponent
+    AddComponent,
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [ TranslateService ],
+      multi: true
+    }
   ],
   entryComponents: [
     AddComponent,

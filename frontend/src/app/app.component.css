@@ -1,15 +1,15 @@
 .image{
   background-image: url("./components/pb.png");
-  height: 70%;
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .main {
     width: 100%;
-  height: 100%;
+  height: 84%;
   padding: 20px;
-  position: absolute;
+  position: fixed;
 }
 
 input#lightswitch {
@@ -20,7 +20,13 @@ input#lightswitch {
 }
 input#lightswitch:checked + .main{
   background: dimgrey;
+  color: lightsalmon;
 }
+
+input#lightswitch:checked +.mat-form-field-empty.mat-form-field-label {
+  color: lightsalmon;
+}
+
 .label{
   position: absolute;
   top:15px;
@@ -35,6 +41,7 @@ input#lightswitch:checked + .main{
   margin: 0px;
 
 }
+
 
 
 

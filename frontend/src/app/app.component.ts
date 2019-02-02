@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from '../language-service';
+import {TranslateService} from './translate.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,13 @@ import {LanguageService} from '../language-service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    private languageService: LanguageService) {
+  constructor(private translate: TranslateService) {
 
   }
   username;
   role;
-  languagesShorts;
-  messages;
 
-  ngOnInit() {
-
-    this.messages = this.languageService.getCurrentLanguage().messages;
-    this.languagesShorts = this.languageService.getAllLanguagesShorts();
+  ngOnInit( ) {
       this.username = sessionStorage.getItem('username');
       this.role = sessionStorage.getItem('role');
       console.log(this.username);
@@ -28,16 +23,14 @@ export class AppComponent implements OnInit {
 
   }
 
+  setLang(lang: string) {
+    this.translate.use(lang);
+  }
   logout() {
     this.username = null;
     this.role = null;
     sessionStorage.clear();
     window.location.reload();
   }
-  changeLanguage(languageShort) {
-    this.languageService.setCurrentLanguageByShort(languageShort);
-    this.messages = this.languageService.getCurrentLanguage().messages;
-  }
-
 
 }
