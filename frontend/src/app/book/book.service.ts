@@ -22,7 +22,6 @@ export class BookService {
   reserve(reservation: ReservationRequest){
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
-    console.log(reservation);
     return this.http.post<ReservationRequest>('http://localhost:8080/reservation/add', reservation, {headers});
   }
 
@@ -31,6 +30,13 @@ export class BookService {
     headers.set('Content-Type', 'application/json');
     console.log(bookId);
     return this.http.post<number>('http://localhost:8080/reservation/decline', bookId, {headers});
+
+  }
+return(bookId: number) {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    console.log(bookId);
+    return this.http.post<number>('http://localhost:8080/reservation/return', bookId, {headers});
 
   }
 

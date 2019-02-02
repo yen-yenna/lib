@@ -4,6 +4,7 @@ import {Book, ReservationRequest} from '../../model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {AddComponent} from '../add/add.component';
 import {BoxComponent} from '../../box/box.component';
+import {Router} from '@angular/router';
 
 
 
@@ -18,16 +19,17 @@ export class ListComponent implements OnInit {
   dataSource: Book[];
   role;
   username;
+  adminLoggedIn;
 
-
-  constructor(private bookService: BookService, private dialog: MatDialog) {
+  constructor(private bookService: BookService, private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
     this.role = sessionStorage.getItem('role');
     this.username = sessionStorage.getItem('username');
-    if(this.role==='admin'){
-      this.displayedColumns= ['title', 'publisher', 'yearOfPublishing', 'status', 'reservation', 'admin_actions'];
+    if (this.role === 'admin') {
+      this.displayedColumns = ['title', 'publisher', 'yearOfPublishing', 'status', 'reservation', 'admin_actions'];
+      this.adminLoggedIn = true;
     }
     this.bookService.getAll().subscribe((data: Book[]) => {
       this.dataSource = data;
@@ -43,7 +45,7 @@ export class ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => {
         console.log(data);
-        this.bookService.save(data).subscribe(data=>{
+        this.bookService.save(data).subscribe(data => {
           this.bookService.getAll().subscribe((data: Book[]) => {
             this.dataSource = data;
           });
@@ -51,33 +53,51 @@ export class ListComponent implements OnInit {
 
       }
     );
-
   }
 
   reserve(element: any) {
+
     if (this.role == null) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = "Musisz byc zalogowany, by dokonac rezerwacji";
+      dialogConfig.data = 'Musisz byc zalogowany, by dokonac rezerwacji';
       this.dialog.open(BoxComponent, dialogConfig);
     } else {
-
-      let reservation = new ReservationRequest(this.username, element.id, '2018-01-01');
-      console.log(reservation);
-      this.bookService.reserve(reservation).subscribe(data => {
-        console.log(reservation);
-      });
+      if (element.status === 'AVAIBLE') {
+        const reservation = new ReservationRequest(this.username, element.id, '2018-01-01');
+        this.bookService.reserve(reservation).subscribe(data => {
+        });
+        this.router.navigateByUrl('/book-list');
+        window.location.reload();
+      } else {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.data = 'Ksiazka jest juz zarezerwowana';
+        this.dialog.open(BoxComponent, dialogConfig);
+      }
     }
 
   }
 
   borrow(element) {
-    this.bookService.borrow(element.id).subscribe(data=>{
-    })
+    console.log(element);
+    this.bookService.borrow(element.id).subscribe(data => {
+    });
+    this.router.navigateByUrl('/book-list');
+    window.location.reload();
   }
 
   decline(element) {
-    this.bookService.decline(element.id).subscribe(data=>{
-    })
+    console.log(element.id);
+    this.bookService.decline(element.id).subscribe(data => {
+    });
+    this.router.navigateByUrl('/book-list');
+    window.location.reload();
+  }
+  return(element) {
+    console.log(element.id);
+    this.bookService.return(element.id).subscribe(data => {
+    });
+    this.router.navigateByUrl('/book-list');
+    window.location.reload();
   }
 }
 
