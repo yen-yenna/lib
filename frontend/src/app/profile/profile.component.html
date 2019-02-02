@@ -1,12 +1,12 @@
 <div id="info" class="info">
-  <h3>Your profile information:</h3>
-  <h3>Username: {{user.username}}</h3>
+  <h3>{{'my profile' | translate}}</h3>
+  <h3>{{'username' | translate}} {{user.username}}</h3>
   <h3>Email: {{user.email}}</h3>
-  <h3>Name: {{user.name}}</h3>
+  <h3>{{'name' |translate}} {{user.name}}</h3>
   <h3>Pesel: {{user.pesel}}</h3>
 </div>
 <div fxLayout fxLayoutAlign="center center">
-  <h2>   Your reservations:</h2>
+  <h2>   {{'reservations' | translate}}</h2>
   <br>
 </div>
 <div fxLayout fxLayoutAlign="center center">
@@ -17,30 +17,30 @@
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
     <ng-container matColumnDef="reservationDate">
-      <th mat-header-cell *matHeaderCellDef> reservationDate </th>
+      <th mat-header-cell *matHeaderCellDef> {{'reservationDate' | translate}} </th>
       <td mat-cell *matCellDef="let element"> {{element.reservationDate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="reservedTo">
-      <th mat-header-cell *matHeaderCellDef> reservedTo </th>
+      <th mat-header-cell *matHeaderCellDef> {{'reservedTo'|translate}} </th>
       <td mat-cell *matCellDef="let element"> {{element.reservedTo}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> status </th>
+      <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="bookTitle">
-      <th mat-header-cell *matHeaderCellDef> bookTitle </th>
+      <th mat-header-cell *matHeaderCellDef> {{'bookTitle'|translate}} </th>
       <td mat-cell *matCellDef="let element"> {{element.bookTitle}} </td>
     </ng-container>
     <ng-container matColumnDef="bookPublisher">
-      <th mat-header-cell *matHeaderCellDef> bookPublisher </th>
+      <th mat-header-cell *matHeaderCellDef> {{'bookPublisher'|translate}} </th>
       <td mat-cell *matCellDef="let element"> {{element.bookPublisher}} </td>
     </ng-container>
     <ng-container matColumnDef="bookYearOfPublishing">
-      <th mat-header-cell *matHeaderCellDef> bookYearOfPublishing </th>
+      <th mat-header-cell *matHeaderCellDef> {{'bookYearOfPublishing'|translate}} </th>
       <td mat-cell *matCellDef="let element"> {{element.bookYearOfPublishing}} </td>
     </ng-container>
 
