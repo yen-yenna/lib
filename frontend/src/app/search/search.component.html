@@ -1,0 +1,16 @@
+
+<div fxLayout fxLayoutAlign="center center">
+  <h4>{{'booksearch'|translate}}</h4>
+  <br>
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <div>
+    <div *ngFor="let book of dataSource | async"
+         class="search-result" >
+      {{book.title}}
+    </div>
+    <button type="button" ng-click="search">{{'search'| translate}}</button>
+  </div>
+
+</div>
+
+

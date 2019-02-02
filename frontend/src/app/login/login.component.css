@@ -4,8 +4,12 @@
   margin: 5%;
   align-items: center;
   justify-content: center;
+  border-color: coral;
+
+
 }
 
 .form-container > * {
   width: 50%;
 }
+

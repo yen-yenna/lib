@@ -1,15 +1,17 @@
 <br>
 <div fxLayout fxLayoutAlign="center center">
-  <h2>   Login:</h2>
+  <h2> {{'login'|translate}}  </h2>
   <br>
 </div>
-<form class="form-container" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" >
+
+<form class="form-container"  [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" autocomplete="off" novalidate >
 
   <mat-form-field>
-    <input matInput placeholder="username" formControlName="username" required>
+    <input matInput placeholder="{{'username'|translate}}" formControlName="username" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="password" formControlName="password" required>
+    <input matInput type="password" placeholder="{{'password'|translate}}" formControlName="password" required >
   </mat-form-field>
-  <button class="btn btn-default" mat-button type="submit">Login</button>
+  <button class="btn btn-default" mat-button type="submit">{{'logIn'|translate}}</button>
 </form>
+

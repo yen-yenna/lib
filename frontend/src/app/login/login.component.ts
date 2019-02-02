@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {RegisterService} from '../register/service/register.service';
 import {Login, User} from '../model';
-import {MatDialog, MatDialogConfig} from "@angular/material";
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {BoxComponent} from '../box/box.component';
 import {Router} from '@angular/router';
 
